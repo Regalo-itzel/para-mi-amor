@@ -87,8 +87,11 @@
         overlay.addEventListener('click', () => {
             musica.play().catch(error => console.log("Error:", error));
             overlay.style.opacity = '0';
-            setTimeout(() => { overlay.style.display = 'none'; }, 800);
-        });
+           setTimeout(() => {
+            overlay.style.display = 'none';
+            document.getElementById('pregunta-final').style.opacity = '1';
+        }, 800);
+    });
 
         function crearConstelacion() {
             const contenedor = document.getElementById('constelacion');
@@ -107,7 +110,7 @@
         crearConstelacion();
     </script>
 
-   <div style="position: fixed; bottom: 10vh; left: 0; width: 100%; text-align: center; z-index: 9999; pointer-events: none;">
+ <div id="pregunta-final" style="position: fixed; bottom: 10vh; left: 0; width: 100%; text-align: center; z-index: 9999; pointer-events: none; opacity: 0; transition: opacity 2s;">
     <h2 style="color: #ff0077; text-shadow: 0 0 15px #fff; font-family: sans-serif; font-size: 2.5em; margin: 0;">
         ¿Quieres ser mi novia? ❤️
     </h2>
