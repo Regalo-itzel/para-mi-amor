@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Reina Hermosa 💖</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background: #000;
+            font-family: 'Courier New', Courier, monospace;
+            color: white; display: flex; justify-content: center;
+            align-items: center; text-align: center;
+        }
+
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex;
+            flex-direction: column; justify-content: center;
+            align-items: center; cursor: pointer; transition: opacity 0.8s ease;
+        }
+
+        #constelacion { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at center, #111 0%, #000 100%); }
+
+        .estrella { position: absolute; background-color: white; border-radius: 50%; animation: parpadeo infinite alternate; }
+
+        @keyframes parpadeo { 0% { opacity: 0.2; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.1); } }
+
+        /* --- FOTOS PLANETAS --- */
+        .foto-fondo {
+            position: absolute; border-radius: 50%; border: 3px solid #ff69b4;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5); object-fit: cover;
+            z-index: 5; animation: flotarPlaneta infinite alternate ease-in-out;
+            opacity: 0.8; transition: transform 0.3s;
+        }
+        .foto-fondo:hover { transform: scale(1.1); opacity: 1; z-index: 20; }
+
+        @keyframes flotarPlaneta { 0% { transform: translateY(0); } 100% { transform: translateY(-20px); } }
+
+        /* Posiciones usando tus nombres de archivos */
+        .f1 { width: 110px; height: 110px; top: 10%; left: 5%; animation-duration: 4s; }
+        .f2 { width: 130px; height: 130px; bottom: 10%; left: 8%; animation-duration: 5s; }
+        .f3 { width: 110px; height: 110px; top: 15%; right: 5%; animation-duration: 4.5s; }
+        .f4 { width: 120px; height: 120px; bottom: 15%; right: 8%; animation-duration: 6s; }
+
+        .contenido { position: relative; z-index: 10; padding: 20px; max-width: 600px; }
+        h1 { font-size: 2.5rem; text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4; margin-bottom: 10px; }
+        .corazon-grande { font-size: 4rem; color: #ff69b4; animation: latido 1.5s infinite; margin: 20px 0; }
+        @keyframes latido { 0%, 30%, 60% { transform: scale(1); } 15% { transform: scale(1.2); } 45% { transform: scale(1.15); } }
+        .dedicatoria { font-size: 1.2rem; line-height: 1.6; opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <h2 style="color: #ff69b4;">Tengo algo para ti...</h2>
+        <p>(Haz clic para entrar)</p>
+        <span style="font-size: 3rem;">🎁</span>
+    </div>
+
+    <audio id="miMusica" loop>
+        <source src="ninademicorazon.mp3.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="constelacion"></div>
+
+    <img src="55203.jpg" class="foto-fondo f1">
+    <img src="54679.jpg" class="foto-fondo f2">
+    <img src="54676.jpg" class="foto-fondo f3">
+    <img src="54527.jpg" class="foto-fondo f4">
+
+    <div class="contenido">
+        <h1>Para: Xiomara Itzel 💕</h1>
+        <div class="corazon-grande">❤️</div>
+        <p class="dedicatoria">
+            "Eres mi casualidad más bonita. <br>
+            Gracias por existir y por llenar mi mundo <br>
+            de luz, incluso en mis días más oscuros. <br>
+            Te amo mucho."
+        </p>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        const musica = document.getElementById('miMusica');
+
+        overlay.addEventListener('click', () => {
+            musica.play().catch(error => console.log("Error:", error));
+            overlay.style.opacity = '0';
+            setTimeout(() => { overlay.style.display = 'none'; }, 800);
+        });
+
+        function crearConstelacion() {
+            const contenedor = document.getElementById('constelacion');
+            for (let i = 0; i < 150; i++) {
+                const estrella = document.createElement('div');
+                estrella.className = 'estrella';
+                const tamano = Math.random() * 2 + 1 + 'px';
+                estrella.style.width = tamano;
+                estrella.style.height = tamano;
+                estrella.style.top = Math.random() * 100 + '%';
+                estrella.style.left = Math.random() * 100 + '%';
+                estrella.style.animationDuration = Math.random() * 3 + 2 + 's';
+                contenedor.appendChild(estrella);
+            }
+        }
+        crearConstelacion();
+    </script>
+</body>
+</html>
