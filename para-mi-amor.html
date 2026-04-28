@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <title>Para Mi Reina Hermosa 💖</title>
     <style>
         body, html {
@@ -83,15 +84,27 @@
     <script>
         const overlay = document.getElementById('overlay');
         const musica = document.getElementById('miMusica');
-
-        overlay.addEventListener('click', () => {
-            musica.play().catch(error => console.log("Error:", error));
-            overlay.style.opacity = '0';
-           setTimeout(() => {
-            overlay.style.display = 'none';
-            document.getElementById('pregunta-final').style.opacity = '1';
-        }, 800);
+overlay.addEventListener('click', () => {
+    // 1. Disparar confeti
+    confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff0077', '#ffffff', '#ff88aa']
     });
+
+    // 2. Iniciar música
+    musica.play().catch(error => console.log("Sonido desactivado o bloqueado"));
+
+    // 3. Desvanecer el regalo
+    overlay.style.opacity = '0';
+
+    // 4. Quitar el regalo y mostrar la pregunta final
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        document.getElementById('pregunta-final').style.opacity = '1';
+    }, 800);
+});
 
         function crearConstelacion() {
             const contenedor = document.getElementById('constelacion');
